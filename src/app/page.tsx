@@ -3,6 +3,7 @@ import Splash from "@/components/Splash";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import Capabilities from "@/components/Capabilities";
+import CategoryIndex from "@/components/CategoryIndex";
 import HowItWorks from "@/components/HowItWorks";
 import Verification from "@/components/Verification";
 import { FinalCta, Footer, Industries, Knowledge, Platform, Pricing, Split } from "@/components/Sections";
@@ -16,6 +17,7 @@ export default function Home() {
       <main id="main">
         <Hero />
         <Capabilities />
+        <CategoryIndex />
         <HowItWorks />
         <Split />
         <Platform />

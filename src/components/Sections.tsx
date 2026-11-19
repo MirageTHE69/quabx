@@ -150,9 +150,13 @@ export function Industries() {
         <h2 className="disp h2 mask" style={{ maxWidth: 760, marginBottom: 56 }}>
           Built for the industries that build India.
         </h2>
-        <div className="grid c4 stg ind-grid">
+        <p className="r" style={{ marginTop: -32, marginBottom: 48, maxWidth: 560, fontSize: 16, lineHeight: 1.6, color: "var(--body)" }}>
+          Sector-specialist capability for regulated and demanding industries. Select a sector to see its full
+          capability list.
+        </p>
+        <div className="grid c5 stg ind-grid">
           {INDUSTRIES.map((x) => (
-            <a key={x.code} className="ind" href={LINKS.find}>
+            <a key={x.code} className="ind" href={x.href}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0B0E13" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d={x.p} />

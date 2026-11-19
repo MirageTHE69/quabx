@@ -1,6 +1,7 @@
 "use client";
 
 import { Arrow, d } from "./ui";
+import { SEARCH_EVENT } from "./CategoryIndex";
 
 export default function HeroSearch() {
   return (
@@ -12,12 +13,13 @@ export default function HeroSearch() {
       style={d(450)}
       onSubmit={(e) => {
         e.preventDefault();
-        document.getElementById("cap")?.scrollIntoView({ behavior: "smooth" });
+        const q = String(new FormData(e.currentTarget).get("q") ?? "").trim();
+        window.dispatchEvent(new CustomEvent(SEARCH_EVENT, { detail: q }));
       }}
     >
       <label>
         <span className="lbl">What do you need to source?</span>
-        <input className="inp" type="text" name="q" placeholder="e.g. 5-axis CNC, SS316 flanges, investment casting" />
+        <input className="inp" type="text" name="q" placeholder="e.g. 5-axis machining, investment casting, PLC programming" />
       </label>
       <label>
         <span className="lbl">Location (optional)</span>

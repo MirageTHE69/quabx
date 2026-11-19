@@ -31,6 +31,7 @@ export function useExperience() {
 
 const SPLASH_KEY = "qx-intro-seen";
 const PIN_MIN_WIDTH = 900;
+const RAIL_SCROLL_RATIO = 0.55;
 const $ = (id: string) => document.getElementById(id);
 
 export default function Experience({ children }: { children: ReactNode }) {
@@ -72,7 +73,8 @@ export default function Experience({ children }: { children: ReactNode }) {
     if (rfq) rfq.style.height = `${Math.round(vh + vh * 0.75 * 4)}px`;
     if (rail && track) {
       railShift.current = Math.max(0, track.scrollWidth - vw);
-      rail.style.height = `${Math.round(vh + railShift.current)}px`;
+      // The rail moves faster than the page scrolls, so 36 cards don't need 10,000px of scrolling.
+      rail.style.height = `${Math.round(vh + railShift.current * RAIL_SCROLL_RATIO)}px`;
     }
   }, []);
 
@@ -127,8 +129,13 @@ export default function Experience({ children }: { children: ReactNode }) {
         track.style.transform = `translate3d(${-q * railShift.current}px,0,0)`;
         const rb = $("qx-railbar");
         if (rb) rb.style.transform = `scaleX(${q})`;
+        const cards = track.children;
+        const idx = Math.round(q * (cards.length - 1));
         const rn = $("qx-railn");
-        if (rn) rn.textContent = String(1 + Math.round(q * 14)).padStart(2, "0");
+        if (rn) rn.textContent = String(idx + 1).padStart(2, "0");
+        const rg = $("qx-railg");
+        const grp = (cards[idx] as HTMLElement | undefined)?.dataset.group;
+        if (rg && grp && rg.textContent !== grp) rg.textContent = grp;
       }
     }
 

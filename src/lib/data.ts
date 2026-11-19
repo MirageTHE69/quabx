@@ -10,6 +10,7 @@ export const LINKS = {
   signIn: "#suppliers",
   verification: "#verification",
   capabilities: "#cap",
+  index: "#index",
   industries: "#ind",
 };
 
@@ -20,24 +21,6 @@ export const NAV_LINKS = [
   { label: "Knowledge Centre", href: LINKS.knowledge },
   { label: "Pricing", href: LINKS.pricing },
 ];
-
-export const CAPABILITIES = [
-  ["CNC Machining & Precision Engineering", "Turning · Milling · 5-axis · Grinding · EDM", "CAT-CNC"],
-  ["Casting, Forging & Forming", "Sand · Investment · Die · Closed-die forging", "CAT-CFF"],
-  ["Sheet Metal & Welding", "Laser · Bending · TIG/MIG · Fabrication", "CAT-SMW"],
-  ["Piping, Pressure Vessels & Process Equipment", "ASME · Heat exchangers · Skids", "CAT-PPV"],
-  ["Additive Manufacturing", "SLM · SLS · FDM · Binder jet", "CAT-AM"],
-  ["Composites", "Layup · RTM · Filament winding", "CAT-CMP"],
-  ["Electronics & Embedded", "PCB · PCBA · Firmware · Harness", "CAT-ELE"],
-  ["VLSI & Semiconductor", "Design · Verification · Packaging", "CAT-VLS"],
-  ["Aerospace", "AS9100 · NADCAP processes · Tooling", "CAT-AER"],
-  ["Marine, Offshore & Cryogenic", "Class-approved · LNG · Subsea", "CAT-MOC"],
-  ["Industrial Machinery", "SPMs · Assemblies · Gearboxes", "CAT-IMC"],
-  ["Surface & Heat Treatment", "Plating · Coating · Nitriding · Hardening", "CAT-SHT"],
-  ["Testing, Inspection & Calibration", "NDT · CMM · NABL labs", "CAT-TIC"],
-  ["Engineering Design & CAE", "CAD · FEA · CFD · DFM", "CAT-CAE"],
-  ["Materials & Components", "Bar stock · Plate · Fasteners · Bearings", "CAT-MAT"],
-].map(([t, s, code], i) => ({ t, s, code, n: String(i + 1).padStart(2, "0") }));
 
 export const STEP_TITLES = [
   "Define requirement",
@@ -87,15 +70,25 @@ const ICONS = {
   cons: "M2 18h20M4 18v-2a8 8 0 0 1 16 0v2M10 9V5h4v4",
   robo: "M4 21h8M8 21v-5l5-5 4 2M17 13l3-3M13 11l-2-4 3-2",
   def: "M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5z",
+  pharma: "M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.7 3h10.6a2 2 0 0 0 1.7-3l-5-9V3M7 15h10",
+  env: "M5 21c0-9 6-15 15-16-1 9-7 15-15 16zM5 21l7-7",
 };
 
+/* Sector-specific categories 21–30 from the QUABX taxonomy */
 export const INDUSTRIES = (
   [
-    ["Aerospace", "aero"], ["Automotive & EV", "auto"], ["Oil & Gas", "oil"], ["Marine", "marine"],
-    ["Power & Energy", "power"], ["Electronics", "elec"], ["Railways", "rail"], ["Medical Devices", "med"],
-    ["Food Machinery", "food"], ["Construction", "cons"], ["Industrial Automation", "robo"], ["Defence", "def"],
+    ["Aerospace & Aviation", "aero", "cat-aer"],
+    ["Marine, Shipbuilding & Offshore", "marine", "cat-mar"],
+    ["Automotive, EV & Mobility", "auto", "cat-aut"],
+    ["Defence, Space & Satellite", "def", "cat-def"],
+    ["Oil, Gas & Petrochemical", "oil", "cat-ogp"],
+    ["Energy, Renewables & Nuclear", "power", "cat-enr"],
+    ["Medical Devices & Biomedical", "med", "cat-med"],
+    ["Pharma, Biotech & Life Sciences", "pharma", "cat-pha"],
+    ["Food Processing & Agriculture", "food", "cat-fod"],
+    ["Environmental, Water & HVAC", "env", "cat-env"],
   ] as const
-).map(([t, k], i) => ({ t, p: ICONS[k], code: `IND-${String(i + 1).padStart(2, "0")}` }));
+).map(([t, k, slug], i) => ({ t, p: ICONS[k], href: `#${slug}`, code: `IND-${String(i + 1).padStart(2, "0")}` }));
 
 export const GUIDES = [
   { tag: "Procurement", n: "G-02", t: "Procurement & Sourcing Guide", d: "Building a shortlist, qualifying suppliers and running a fair RFQ." },
@@ -128,7 +121,7 @@ export const SUPPLIER_POINTS = [
 ];
 
 export const FOOTER_COLS = [
-  { h: "Explore", links: [["Find Suppliers", LINKS.find], ["Post an RFQ", LINKS.rfq], ["Capabilities", LINKS.capabilities], ["Industries", LINKS.industries]] },
+  { h: "Explore", links: [["Find Suppliers", LINKS.find], ["Post an RFQ", LINKS.rfq], ["Capabilities", LINKS.capabilities], ["Category Index", LINKS.index], ["Industries", LINKS.industries]] },
   { h: "Resources", links: [["Knowledge Centre", LINKS.knowledge], ["Verification", LINKS.verification], ["RFQ Guide", LINKS.knowledge], ["FAQ", "#faq"]] },
   { h: "For Business", links: [["Join as Supplier", LINKS.join], ["Buyer Accounts", LINKS.suppliers], ["Pricing", LINKS.pricing], ["Enterprise", LINKS.pricing]] },
   { h: "Company", links: [["About", "#about"], ["Contact", "#contact"], ["Careers", "#careers"], ["Terms", "#terms"], ["Privacy", "#privacy"]] },
